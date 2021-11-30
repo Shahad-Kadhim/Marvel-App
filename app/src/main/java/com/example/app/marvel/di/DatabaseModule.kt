@@ -2,8 +2,7 @@ package com.example.app.marvel.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.app.marvel.data.local.MarvelDao
-import com.example.app.marvel.data.local.MarvelDatabase
+import com.example.app.marvel.data.local.*
 import dagger.*
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -32,6 +31,7 @@ object DatabaseModule {
             databaseName
         ).build()
 
+    @Singleton
     @Provides
     @Named("databaseName")
     fun provideDataBaseName(): String = "MarvelDataBase"

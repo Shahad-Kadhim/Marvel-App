@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.app.marvel.BR
 
-abstract class BaseFragment<VB: ViewDataBinding, VM:BaseViewModel>(): Fragment() {
+abstract class BaseFragment<VB: ViewDataBinding, VM:BaseViewModel>: Fragment() {
 
     abstract val layoutId: Int
     lateinit var viewModel: VM
