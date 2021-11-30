@@ -1,9 +1,7 @@
 package com.example.app.marvel.di
 
-import android.os.Build.VERSION_CODES.BASE
 import com.example.app.marvel.BuildConfig
-import com.example.app.marvel.data.remote.AuthInterceptor
-import com.example.app.marvel.data.remote.MarvelService
+import com.example.app.marvel.data.remote.*
 import dagger.*
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
