@@ -22,6 +22,11 @@ class MainActivity : AppCompatActivity() {
         ).also { binding ->
             binding.lifecycleOwner=this
         }
+        test() //this function just for test
+    }
+
+    private fun test() {
+
     }
 
     override fun onResume() {
