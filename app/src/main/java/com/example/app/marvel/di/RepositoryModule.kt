@@ -23,7 +23,18 @@ object RepositoryModule {
         characterMapper: CharacterMapper,
         comicEntityMapper: ComicEntityMapper,
         comicMapper: ComicMapper,
-    ) :MarvelRepository = MarvelRepositoryImp(dao,apiService,characterEntityMapper,characterMapper,comicEntityMapper,comicMapper)
+        creatorEntityMapper: CreatorEntityMapper,
+        creatorMapper: CreatorMapper
+    ) :MarvelRepository = MarvelRepositoryImp(
+        dao,
+        apiService,
+        characterEntityMapper,
+        characterMapper,
+        comicEntityMapper,
+        comicMapper,
+        creatorEntityMapper,
+        creatorMapper
+    )
 
 
     @Singleton
@@ -41,5 +52,13 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideComicMapper(): ComicMapper = ComicMapper()
+
+    @Singleton
+    @Provides
+    fun provideCreatorEntityMapper(): CreatorEntityMapper = CreatorEntityMapper()
+
+    @Singleton
+    @Provides
+    fun provideCreatorMapper(): CreatorMapper = CreatorMapper()
 
 }

@@ -1,6 +1,6 @@
 package com.example.app.marvel.domain
 
-import com.example.app.marvel.domain.models.Character
+import com.example.app.marvel.domain.models.*
 import kotlinx.coroutines.flow.Flow
 
 interface MarvelRepository{
@@ -13,4 +13,7 @@ interface MarvelRepository{
 
     suspend fun refreshComics()
 
+    fun getAllCreators(): Flow<List<Creator>>
+
+    suspend fun refreshCreators()
 }

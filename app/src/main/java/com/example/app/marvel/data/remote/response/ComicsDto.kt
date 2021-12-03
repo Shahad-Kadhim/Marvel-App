@@ -61,5 +61,5 @@ data class ComicsDto(
     @SerializedName("variantDescription")
     val variantDescription: String? = null,
     @SerializedName("variants")
-    val variants: List<Variant>? = null
+    val variants: List<Summary>? = null
 )

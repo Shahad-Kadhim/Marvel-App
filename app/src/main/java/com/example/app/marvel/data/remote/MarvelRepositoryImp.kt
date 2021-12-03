@@ -6,10 +6,13 @@ import com.example.app.marvel.domain.MarvelRepository
 import com.example.app.marvel.data.local.MarvelDao
 import com.example.app.marvel.data.local.mappers.CharacterEntityMapper
 import com.example.app.marvel.data.local.mappers.ComicEntityMapper
-import com.example.app.marvel.domain.Comic
+import com.example.app.marvel.data.local.mappers.CreatorEntityMapper
+import com.example.app.marvel.domain.models.Comic
 import com.example.app.marvel.domain.mappers.CharacterMapper
 import com.example.app.marvel.domain.mappers.ComicMapper
+import com.example.app.marvel.domain.mappers.CreatorMapper
 import com.example.app.marvel.domain.models.Character
+import com.example.app.marvel.domain.models.Creator
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
 import java.lang.Exception
@@ -22,6 +25,8 @@ class MarvelRepositoryImp @Inject constructor(
     private val characterMapper: CharacterMapper,
     private val comicEntityMapper: ComicEntityMapper,
     private val comicMapper: ComicMapper,
+    private val creatorEntityMapper: CreatorEntityMapper,
+    private val creatorMapper: CreatorMapper,
     ): MarvelRepository{
 
     override fun getAllCharacters(): Flow<List<Character>> =
@@ -53,6 +58,23 @@ class MarvelRepositoryImp @Inject constructor(
             { body ->
                 body?.data?.results?.map { comicDto ->
                     comicEntityMapper.map(comicDto)
+                }
+            }
+    }
+
+
+    override fun getAllCreators(): Flow<List<Creator>> =
+        wrapper(
+            dao.getCreators(),
+            creatorMapper::map
+        )
+
+
+    override suspend fun refreshCreators() {
+        refreshWrapper(api.getCreators(),dao::addCreators)
+            { body ->
+                body?.data?.results?.map { creatorDto ->
+                    creatorEntityMapper.map(creatorDto)
                 }
             }
     }

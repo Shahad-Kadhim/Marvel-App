@@ -19,4 +19,10 @@ interface MarvelService{
     ): Response<MarvelResponse<ComicsDto>>
 
 
+    @GET("creators")
+    suspend fun getCreators(
+        @Query("limit") numberOfCharacters: Int = 20
+    ): Response<MarvelResponse<CreatorDto>>
+
+
 }

@@ -1,7 +1,7 @@
 package com.example.app.marvel.domain.mappers
 
 import com.example.app.marvel.data.local.entities.ComicEntity
-import com.example.app.marvel.domain.Comic
+import com.example.app.marvel.domain.models.Comic
 import com.example.app.marvel.util.Mapper
 
 class ComicMapper: Mapper<ComicEntity, Comic> {
