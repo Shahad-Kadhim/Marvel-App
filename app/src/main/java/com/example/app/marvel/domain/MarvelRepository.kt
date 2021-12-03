@@ -16,4 +16,8 @@ interface MarvelRepository{
     fun getAllCreators(): Flow<List<Creator>>
 
     suspend fun refreshCreators()
+
+    fun getRecentSearches(): Flow<List<Searches>>
+
+    suspend fun addSearch(search:Searches)
 }

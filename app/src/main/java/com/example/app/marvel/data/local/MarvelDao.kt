@@ -4,6 +4,7 @@ import androidx.room.*
 import com.example.app.marvel.data.local.entities.CharacterEntity
 import com.example.app.marvel.data.local.entities.ComicEntity
 import com.example.app.marvel.data.local.entities.CreatorEntity
+import com.example.app.marvel.data.local.entities.SearchesEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -29,5 +30,11 @@ interface MarvelDao{
     @Query("SELECT * FROM CreatorEntity")
     fun getCreators(): Flow<List<CreatorEntity>>
 
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addSearch(search: SearchesEntity)
+
+    @Query("SELECT * FROM SearchesEntity ORDER BY date DESC")
+    fun getRecentSearches(): Flow<List<SearchesEntity>>
 
 }

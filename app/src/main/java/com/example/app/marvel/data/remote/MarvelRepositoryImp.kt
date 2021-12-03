@@ -4,15 +4,10 @@ package com.example.app.marvel.data.remote
 import android.util.Log
 import com.example.app.marvel.domain.MarvelRepository
 import com.example.app.marvel.data.local.MarvelDao
-import com.example.app.marvel.data.local.mappers.CharacterEntityMapper
-import com.example.app.marvel.data.local.mappers.ComicEntityMapper
-import com.example.app.marvel.data.local.mappers.CreatorEntityMapper
+import com.example.app.marvel.data.local.mappers.*
 import com.example.app.marvel.domain.models.Comic
-import com.example.app.marvel.domain.mappers.CharacterMapper
-import com.example.app.marvel.domain.mappers.ComicMapper
-import com.example.app.marvel.domain.mappers.CreatorMapper
-import com.example.app.marvel.domain.models.Character
-import com.example.app.marvel.domain.models.Creator
+import com.example.app.marvel.domain.mappers.*
+import com.example.app.marvel.domain.models.*
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
 import java.lang.Exception
@@ -27,6 +22,7 @@ class MarvelRepositoryImp @Inject constructor(
     private val comicMapper: ComicMapper,
     private val creatorEntityMapper: CreatorEntityMapper,
     private val creatorMapper: CreatorMapper,
+    val searchesMapper: SearchesMapper,
     ): MarvelRepository{
 
     override fun getAllCharacters(): Flow<List<Character>> =
@@ -78,6 +74,19 @@ class MarvelRepositoryImp @Inject constructor(
                 }
             }
     }
+
+    override fun getRecentSearches(): Flow<List<Searches>> =
+        wrapper(
+            dao.getRecentSearches(),
+            searchesMapper::map
+        )
+
+    override suspend fun addSearch(search: Searches) {
+        searchesMapper.mapInverse(search).run {
+            dao.addSearch(this)
+        }
+    }
+
 
     private  fun <T,U> wrapper(
         data:Flow<List<T>> ,

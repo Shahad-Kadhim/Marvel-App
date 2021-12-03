@@ -24,7 +24,8 @@ object RepositoryModule {
         comicEntityMapper: ComicEntityMapper,
         comicMapper: ComicMapper,
         creatorEntityMapper: CreatorEntityMapper,
-        creatorMapper: CreatorMapper
+        creatorMapper: CreatorMapper,
+        searchesMapper: SearchesMapper
     ) :MarvelRepository = MarvelRepositoryImp(
         dao,
         apiService,
@@ -33,7 +34,8 @@ object RepositoryModule {
         comicEntityMapper,
         comicMapper,
         creatorEntityMapper,
-        creatorMapper
+        creatorMapper,
+        searchesMapper
     )
 
 
@@ -60,5 +62,9 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideCreatorMapper(): CreatorMapper = CreatorMapper()
+
+    @Singleton
+    @Provides
+    fun provideSearchesMapper(): SearchesMapper = SearchesMapper()
 
 }
