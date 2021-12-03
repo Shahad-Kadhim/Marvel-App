@@ -1,7 +1,7 @@
-package com.example.app.marvel.data.domain
+package com.example.app.marvel.domain.models
 
 data class Character(
-    val id: String,
+    val id: Int,
     val name: String,
     val imageUrl: String
 )

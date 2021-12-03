@@ -1,6 +1,7 @@
 package com.example.app.marvel.data.local
 
 import androidx.room.*
+import com.example.app.marvel.data.local.entities.CharacterEntity
 
 
 @Database(entities = [CharacterEntity::class], version = 1)

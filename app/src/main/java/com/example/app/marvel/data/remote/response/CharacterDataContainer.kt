@@ -11,7 +11,7 @@ data class CharacterDataContainer(
     @SerializedName("offset")
     val offset: Int? = null,
     @SerializedName("results")
-    val character: List<CharacterDto>? = null,
+    val characters: List<CharacterDto>? = null,
     @SerializedName("total")
     val total: Int? = null
 )
