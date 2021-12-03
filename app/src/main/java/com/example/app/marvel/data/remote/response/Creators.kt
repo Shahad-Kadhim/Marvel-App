@@ -3,13 +3,13 @@ package com.example.app.marvel.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Comics(
+data class Creators(
     @SerializedName("available")
     val available: Int? = null,
     @SerializedName("collectionURI")
     val collectionURI: String? = null,
     @SerializedName("items")
-    val items: List<Summary>? = null,
+    val items: List<CreatorItem>? = null,
     @SerializedName("returned")
     val returned: Int? = null
 )

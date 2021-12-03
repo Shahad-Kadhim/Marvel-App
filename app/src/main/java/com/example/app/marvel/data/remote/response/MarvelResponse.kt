@@ -3,7 +3,7 @@ package com.example.app.marvel.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class CharacterResponse(
+data class MarvelResponse<T>(
     @SerializedName("attributionHTML")
     val attributionHTML: String? = null,
     @SerializedName("attributionText")
@@ -13,7 +13,7 @@ data class CharacterResponse(
     @SerializedName("copyright")
     val copyright: String? = null,
     @SerializedName("data")
-    val data: CharacterDataContainer? = null,
+    val data: Data<T>? = null,
     @SerializedName("etag")
     val etag: String? = null,
     @SerializedName("status")

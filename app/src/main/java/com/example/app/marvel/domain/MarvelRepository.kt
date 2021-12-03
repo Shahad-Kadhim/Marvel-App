@@ -9,4 +9,8 @@ interface MarvelRepository{
 
     suspend fun refreshCharacters()
 
+     fun getAllComics(): Flow<List<Comic>>
+
+    suspend fun refreshComics()
+
 }

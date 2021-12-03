@@ -1,9 +1,8 @@
 package com.example.app.marvel.data.remote.response
 
-
 import com.google.gson.annotations.SerializedName
 
-data class Events(
+data class Details(
     @SerializedName("available")
     val available: Int? = null,
     @SerializedName("collectionURI")

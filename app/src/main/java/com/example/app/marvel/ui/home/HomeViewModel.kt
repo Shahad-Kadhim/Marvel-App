@@ -16,12 +16,12 @@ class HomeViewModel @Inject constructor(
 ): BaseViewModel(){
     init {
         viewModelScope.launch {
-            marvelRepositoryImp.getAllCharacters().collect {
+            marvelRepositoryImp.getAllComics().collect {
                 Log.i("HGHG",it.toString())
             }
         }
         viewModelScope.launch {
-            marvelRepositoryImp.refreshCharacters()
+            marvelRepositoryImp.refreshComics()
 
         }
     }
