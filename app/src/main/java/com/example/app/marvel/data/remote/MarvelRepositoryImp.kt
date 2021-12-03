@@ -22,7 +22,7 @@ class MarvelRepositoryImp @Inject constructor(
     private val comicMapper: ComicMapper,
     private val creatorEntityMapper: CreatorEntityMapper,
     private val creatorMapper: CreatorMapper,
-    val searchesMapper: SearchesMapper,
+    private val searchesMapper: SearchesMapper,
     ): MarvelRepository{
 
     override fun getAllCharacters(): Flow<List<Character>> =
@@ -33,7 +33,7 @@ class MarvelRepositoryImp @Inject constructor(
 
 
     override suspend fun refreshCharacters() {
-        refreshWrapper(api.getCharacters(),dao::addCharacter)
+        refreshWrapper(api::getCharacters,dao::addCharacter)
             { body ->
                 body?.data?.results?.map { characterDto ->
                     characterEntityMapper.map(characterDto)
@@ -50,7 +50,7 @@ class MarvelRepositoryImp @Inject constructor(
 
 
     override suspend fun refreshComics() {
-        refreshWrapper(api.getComics(),dao::addComic)
+        refreshWrapper(api::getComics,dao::addComic)
             { body ->
                 body?.data?.results?.map { comicDto ->
                     comicEntityMapper.map(comicDto)
@@ -67,7 +67,7 @@ class MarvelRepositoryImp @Inject constructor(
 
 
     override suspend fun refreshCreators() {
-        refreshWrapper(api.getCreators(),dao::addCreators)
+        refreshWrapper(api::getCreators,dao::addCreators)
             { body ->
                 body?.data?.results?.map { creatorDto ->
                     creatorEntityMapper.map(creatorDto)
@@ -99,12 +99,12 @@ class MarvelRepositoryImp @Inject constructor(
         }
 
     private suspend fun <T,U> refreshWrapper(
-        response: Response<T> ,
+        request: suspend () -> Response<T> ,
         insertIntoDatabase: suspend (List<U>) ->Unit,
         mapper: (T?) -> List<U>? ,
     ){
         try {
-            response.also {
+            request().also {
                 if(it.isSuccessful){
                     mapper(it.body())?.let {  list ->
                         insertIntoDatabase(list)
