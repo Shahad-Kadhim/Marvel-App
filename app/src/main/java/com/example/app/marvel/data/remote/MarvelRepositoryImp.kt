@@ -16,19 +16,14 @@ import javax.inject.Inject
 class MarvelRepositoryImp @Inject constructor(
     private val dao: MarvelDao,
     private val api: MarvelService,
-    private val characterEntityMapper: CharacterEntityMapper,
-    private val characterMapper: CharacterMapper,
-    private val comicEntityMapper: ComicEntityMapper,
-    private val comicMapper: ComicMapper,
-    private val creatorEntityMapper: CreatorEntityMapper,
-    private val creatorMapper: CreatorMapper,
-    private val searchesMapper: SearchesMapper,
+    private val localMappers: LocalMappers,
+    private val domainMapper: DomainMapper,
     ): MarvelRepository{
 
     override fun getAllCharacters(): Flow<List<Character>> =
         wrapper(
             dao.getAllCharacter(),
-            characterMapper::map
+            domainMapper.characterMapper::map
         )
 
 
@@ -36,7 +31,7 @@ class MarvelRepositoryImp @Inject constructor(
         refreshWrapper(api::getCharacters,dao::addCharacter)
             { body ->
                 body?.data?.results?.map { characterDto ->
-                    characterEntityMapper.map(characterDto)
+                    localMappers.characterEntityMapper.map(characterDto)
                 }
             }
     }
@@ -45,7 +40,7 @@ class MarvelRepositoryImp @Inject constructor(
     override fun getAllComics(): Flow<List<Comic>> =
         wrapper(
             dao.getAllComic(),
-            comicMapper::map
+            domainMapper.comicMapper::map
         )
 
 
@@ -53,7 +48,7 @@ class MarvelRepositoryImp @Inject constructor(
         refreshWrapper(api::getComics,dao::addComic)
             { body ->
                 body?.data?.results?.map { comicDto ->
-                    comicEntityMapper.map(comicDto)
+                    localMappers.comicEntityMapper.map(comicDto)
                 }
             }
     }
@@ -62,7 +57,7 @@ class MarvelRepositoryImp @Inject constructor(
     override fun getAllCreators(): Flow<List<Creator>> =
         wrapper(
             dao.getCreators(),
-            creatorMapper::map
+            domainMapper.creatorMapper::map
         )
 
 
@@ -70,7 +65,7 @@ class MarvelRepositoryImp @Inject constructor(
         refreshWrapper(api::getCreators,dao::addCreators)
             { body ->
                 body?.data?.results?.map { creatorDto ->
-                    creatorEntityMapper.map(creatorDto)
+                    localMappers.creatorEntityMapper.map(creatorDto)
                 }
             }
     }
@@ -78,11 +73,11 @@ class MarvelRepositoryImp @Inject constructor(
     override fun getRecentSearches(): Flow<List<Searches>> =
         wrapper(
             dao.getRecentSearches(),
-            searchesMapper::map
+            domainMapper.searchesMapper::map
         )
 
     override suspend fun addSearch(search: Searches) {
-        searchesMapper.mapInverse(search).run {
+        domainMapper.searchesMapper.mapInverse(search).run {
             dao.addSearch(this)
         }
     }

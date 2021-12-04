@@ -54,11 +54,6 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideAuthInterceptor(): AuthInterceptor = AuthInterceptor()
-
-
-    @Singleton
-    @Provides
     fun provideGsonConverter(): GsonConverterFactory =
         GsonConverterFactory.create()
 

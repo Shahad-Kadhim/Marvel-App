@@ -4,9 +4,12 @@ import com.example.app.marvel.data.local.entities.SearchesEntity
 import com.example.app.marvel.domain.models.Searches
 import com.example.app.marvel.util.Mapper
 import java.util.*
+import javax.inject.Inject
 
-class SearchesMapper: Mapper<SearchesEntity,Searches> ,MapperInverse<Searches,SearchesEntity>{
-
+class SearchesMapper @Inject constructor()
+    : Mapper<SearchesEntity,Searches> ,
+    MapperInverse<Searches,SearchesEntity>
+{
     override fun map(input: SearchesEntity): Searches =
         Searches(
             id = input.id,

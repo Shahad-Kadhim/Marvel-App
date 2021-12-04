@@ -3,8 +3,9 @@ package com.example.app.marvel.data.remote
 import com.example.app.marvel.BuildConfig
 import com.example.app.marvel.util.md5
 import okhttp3.*
+import javax.inject.Inject
 
-class AuthInterceptor :Interceptor {
+class AuthInterceptor @Inject constructor() :Interceptor {
 
     private val timeStamp = System.currentTimeMillis().toString()
     private val apikey =BuildConfig.PUPLIC_API_KEY

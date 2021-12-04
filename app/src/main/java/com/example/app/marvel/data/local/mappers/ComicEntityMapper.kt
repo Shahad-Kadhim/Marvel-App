@@ -3,8 +3,9 @@ package com.example.app.marvel.data.local.mappers
 import com.example.app.marvel.data.local.entities.ComicEntity
 import com.example.app.marvel.data.remote.response.ComicsDto
 import com.example.app.marvel.util.Mapper
+import javax.inject.Inject
 
-class ComicEntityMapper: Mapper<ComicsDto,ComicEntity> {
+class ComicEntityMapper @Inject constructor(): Mapper<ComicsDto,ComicEntity> {
 
     override fun map(input: ComicsDto): ComicEntity =
         ComicEntity(
