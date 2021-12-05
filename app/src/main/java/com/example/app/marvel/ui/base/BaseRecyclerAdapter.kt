@@ -12,7 +12,7 @@ abstract class BaseRecyclerAdapter<T>(
 
     abstract val layoutId: Int
 
-    abstract fun <T> areItemsTheSame(
+    abstract fun  areItemsTheSame(
         oldItemPosition: Int,
         newItemPosition: Int,
         newItems: List<T>,

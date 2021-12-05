@@ -1,14 +1,16 @@
 package com.example.app.marvel.ui.home
 
+import android.util.Log
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import com.example.app.marvel.*
 import com.example.app.marvel.domain.models.*
 import com.example.app.marvel.ui.base.*
 
 class HomeRecyclerAdapter(
-    items: List<HomeItem>,
+    var itemsHome: MutableList<HomeItem>,
     private val listener: HomeInteractionListener,
-): BaseRecyclerAdapter<HomeItem>(items, listener) {
+): BaseRecyclerAdapter<HomeItem>(itemsHome, listener) {
 
 
     override var layoutId: Int =0
@@ -16,6 +18,23 @@ class HomeRecyclerAdapter(
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         bind(holder as ItemViewHolder,position)
     }
+
+    fun  setItemsAsPosition(homeItem: HomeItem,position: Int){
+        val newItems= itemsHome.apply {
+            removeAt(position)
+            add(position,homeItem)
+        }
+        val diffResult = DiffUtil.calculateDiff(
+            MarvelDiffUtil(
+                getItems(),
+                newItems,
+                ::areItemsTheSame,
+                ::areContentSame
+            )
+        )
+        diffResult.dispatchUpdatesTo(this)
+    }
+
 
     private fun bind(holder: ItemViewHolder, position: Int) {
         val currentItem =getItems()[position]
@@ -87,14 +106,21 @@ class HomeRecyclerAdapter(
         const val SEARCHES_TYPE = 4
     }
 
-    override fun <T> areItemsTheSame(
+    override fun areItemsTheSame(
         oldItemPosition: Int,
         newItemPosition: Int,
-        newItems: List<T>,
+        newItems: List<HomeItem>,
     ): Boolean {
-        return getItems()[oldItemPosition].order == (newItems[newItemPosition] as HomeItem).order
+        return (getItems()[oldItemPosition].order == newItems[newItemPosition].order)
     }
 
+    override fun areContentSame(
+        oldPosition: Int,
+        newPosition: Int,
+        newList: List<HomeItem>
+    ): Boolean {
+        return  false
+    }
 }
 
 interface HomeInteractionListener: BaseInteractionListener

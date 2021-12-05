@@ -10,12 +10,12 @@ class ComicAdapter(
 ): BaseRecyclerAdapter<Comic>(items,listener) {
     override val layoutId: Int = R.layout.comic_item
 
-    override fun <T> areItemsTheSame(
+    override fun  areItemsTheSame(
         oldItemPosition: Int,
         newItemPosition: Int,
-        newItems: List<T>,
+        newItems: List<Comic>,
     ): Boolean =
-        getItems()[oldItemPosition].id == (newItems[newItemPosition] as Comic).id
+        getItems()[oldItemPosition].id == newItems[newItemPosition].id
 
 }
 

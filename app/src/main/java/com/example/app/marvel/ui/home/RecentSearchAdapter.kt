@@ -10,12 +10,12 @@ class RecentSearchAdapter(
 ): BaseRecyclerAdapter<Searches>(items,listener) {
     override val layoutId: Int = R.layout.search_item
 
-    override fun <T> areItemsTheSame(
+    override fun areItemsTheSame(
         oldItemPosition: Int,
         newItemPosition: Int,
-        newItems: List<T>,
+        newItems: List<Searches>,
     ): Boolean =
-        getItems()[oldItemPosition].id == (newItems[newItemPosition] as Searches).id
+        getItems()[oldItemPosition].id == newItems[newItemPosition].id
 
 }
 

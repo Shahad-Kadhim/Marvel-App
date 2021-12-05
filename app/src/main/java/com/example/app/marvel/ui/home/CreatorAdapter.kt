@@ -10,12 +10,12 @@ class CreatorAdapter(
 ): BaseRecyclerAdapter<Creator>(items,listener) {
     override val layoutId: Int = R.layout.creator_item
 
-    override fun <T> areItemsTheSame(
+    override fun  areItemsTheSame(
         oldItemPosition: Int,
         newItemPosition: Int,
-        newItems: List<T>,
+        newItems: List<Creator>,
     ): Boolean =
-        getItems()[oldItemPosition].id == (newItems[newItemPosition] as Creator).id
+        getItems()[oldItemPosition].id == newItems[newItemPosition].id
 
 }
 

@@ -16,6 +16,10 @@
             android:id="@+id/recycle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:characters="@{viewModel.characters}"
+            app:creator="@{viewModel.creator}"
+            app:comics="@{viewModel.comic}"
+            app:searches="@{viewModel.searches}"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 

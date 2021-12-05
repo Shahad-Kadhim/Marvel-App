@@ -16,7 +16,14 @@ class HomeFragment: BaseFragment<FragmentHomeBinding , HomeViewModel>() ,HomeInt
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
        // just for test
-        binding.recycle.adapter= HomeRecyclerAdapter(listOf(HomeItem.Characters(listOf())),this)
+        binding.recycle.adapter= HomeRecyclerAdapter(
+            mutableListOf(
+                HomeItem.Characters(mutableListOf()),
+                HomeItem.Creators(mutableListOf()),
+                HomeItem.Comics(mutableListOf()),
+                HomeItem.RecentSearches(mutableListOf())
+            ),
+            this)
 
     }
 }
