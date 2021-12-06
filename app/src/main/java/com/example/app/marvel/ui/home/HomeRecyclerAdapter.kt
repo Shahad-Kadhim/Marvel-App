@@ -131,6 +131,10 @@ interface HomeInteractionListener: BaseInteractionListener {
 
     fun onclickSeeMoreCreators()
 
+    fun onClickComic(comicId: Int)
+
+    fun onclickSeeMoreComics()
+
 }
 
 

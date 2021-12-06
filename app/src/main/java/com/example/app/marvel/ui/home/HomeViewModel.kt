@@ -42,4 +42,12 @@ class HomeViewModel @Inject constructor(
     override fun onclickSeeMoreCreators() {
         Log.i("HOME_VIEW_MODEL","Click see more creator")
     }
+
+    override fun onClickComic(comicId: Int) {
+        Log.i("HOME_VIEW_MODEL","$comicId clickME Creator")
+    }
+
+    override fun onclickSeeMoreComics() {
+        Log.i("HOME_VIEW_MODEL","Click see more comics")
+    }
 }
