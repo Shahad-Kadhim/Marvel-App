@@ -82,6 +82,23 @@ class MarvelRepositoryImp @Inject constructor(
     }
 
 
+    override fun getSeries(): Flow<List<Series>> =
+        wrapper(
+            dao.getSeries(),
+            domainMapper.seriesMapper::map
+        )
+
+
+    override suspend fun refersSeries() {
+        refreshWrapper(api::getSeries, dao::addSeries)
+        { body ->
+            body?.data?.results?.map { seriesDto ->
+                localMappers.seriesEntityMapper.map(seriesDto)
+            }
+        }
+    }
+
+
     private  fun <T,U> wrapper(
         data:Flow<List<T>> ,
         mapper: (T) -> U

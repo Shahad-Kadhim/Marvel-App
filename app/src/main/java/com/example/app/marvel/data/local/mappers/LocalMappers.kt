@@ -6,4 +6,5 @@ class LocalMappers @Inject constructor(
     val characterEntityMapper: CharacterEntityMapper,
     val comicEntityMapper: ComicEntityMapper,
     val creatorEntityMapper: CreatorEntityMapper,
+    val seriesEntityMapper: SeriesEntityMapper
 )

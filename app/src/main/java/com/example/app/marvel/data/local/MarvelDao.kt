@@ -34,4 +34,10 @@ interface MarvelDao{
     @Query("SELECT * FROM SearchesEntity ORDER BY date DESC")
     fun getRecentSearches(): Flow<List<SearchesEntity>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addSeries(series: List<SeriesEntity>)
+
+    @Query("SELECT * FROM SeriesEntity ORDER BY lastDateModify DESC")
+    fun getSeries(): Flow<List<SeriesEntity>>
+
 }

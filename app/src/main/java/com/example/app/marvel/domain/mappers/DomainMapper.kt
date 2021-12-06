@@ -7,6 +7,7 @@ class DomainMapper @Inject constructor(
      val comicMapper: ComicMapper,
      val creatorMapper: CreatorMapper,
      val searchesMapper: SearchesMapper,
+     val seriesMapper: SeriesMapper
 )
 
 

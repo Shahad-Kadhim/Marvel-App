@@ -20,4 +20,9 @@ interface MarvelRepository{
     fun getRecentSearches(): Flow<List<Searches>>
 
     suspend fun addSearch(search:Searches)
+
+    fun getSeries(): Flow<List<Series>>
+
+    suspend fun refersSeries()
+
 }

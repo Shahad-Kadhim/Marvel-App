@@ -5,7 +5,7 @@ import com.example.app.marvel.data.local.entities.*
 
 @TypeConverters(Convertor::class)
 @Database(
-    entities = [CharacterEntity::class, ComicEntity::class, CreatorEntity::class, SearchesEntity::class],
+    entities = [CharacterEntity::class, ComicEntity::class, CreatorEntity::class, SearchesEntity::class,SeriesEntity::class],
     version = 1
 )
 abstract class MarvelDatabase: RoomDatabase() {
