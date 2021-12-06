@@ -1,8 +1,10 @@
 package com.example.app.marvel.util
 
 import android.util.Log
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.app.marvel.domain.models.Character
 import com.example.app.marvel.domain.models.Comic
 import com.example.app.marvel.domain.models.Creator
@@ -10,6 +12,7 @@ import com.example.app.marvel.domain.models.Searches
 import com.example.app.marvel.ui.base.BaseRecyclerAdapter
 import com.example.app.marvel.ui.home.HomeItem
 import com.example.app.marvel.ui.home.HomeRecyclerAdapter
+import com.mig35.carousellayoutmanager.CarouselLayoutManager
 
 
 @BindingAdapter(value = ["app:characters"])
@@ -26,7 +29,6 @@ fun <T> setRecyclerItems(view: RecyclerView, character: List<Character>?) {
 fun <T> setCreatorItems(view: RecyclerView,creator: List<Creator>?) {
     (view.adapter as HomeRecyclerAdapter?)?.let {
         creator?.takeIf { it.isNotEmpty() }?.let { listItems ->
-            Log.i("CREA","YES")
             it.setItemsAsPosition(HomeItem.Creators(listItems.toMutableList()),1)
         }
     }
@@ -56,3 +58,12 @@ fun <T> setSearchesItems(view: RecyclerView,searches: List<Searches>?) {
 
 
 
+@BindingAdapter(value = ["app:imageFromUrl"])
+fun setImage(view: ImageView, url: String?) {
+    url?.let { imageUrl ->
+        Glide.with(view)
+            .load(imageUrl)
+            .centerCrop()
+            .into(view)
+    }
+}
