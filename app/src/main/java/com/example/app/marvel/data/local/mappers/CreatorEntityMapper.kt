@@ -11,7 +11,7 @@ class CreatorEntityMapper @Inject constructor(): Mapper<CreatorDto, CreatorEntit
         CreatorEntity(
             id = input.id,
             name =input.fullName,
-            imageUrl = "${input.thumbnail?.path}.${input.thumbnail?.extension}",
+            imageUrl = "${input.thumbnail?.path}.${input.thumbnail?.extension}".replace("http","https"),
             lastModify = input.modified
         )
 

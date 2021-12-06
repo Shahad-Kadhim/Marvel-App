@@ -2,4 +2,5 @@
     <string name="app_name">Marvel</string>
     <string name="characters">Characters</string>
     <string name="see_more">See More</string>
+    <string name="creators">Creators</string>
 </resources>

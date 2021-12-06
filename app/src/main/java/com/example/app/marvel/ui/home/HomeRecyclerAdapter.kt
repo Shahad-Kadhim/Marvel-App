@@ -127,6 +127,10 @@ interface HomeInteractionListener: BaseInteractionListener {
 
     fun onclickSeeMoreCharacter()
 
+    fun onClickCreator(creatorId: Int)
+
+    fun onclickSeeMoreCreators()
+
 }
 
 
