@@ -44,10 +44,19 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun onClickComic(comicId: Int) {
-        Log.i("HOME_VIEW_MODEL","$comicId clickME Creator")
+        Log.i("HOME_VIEW_MODEL","$comicId clickME Comic")
     }
 
     override fun onclickSeeMoreComics() {
         Log.i("HOME_VIEW_MODEL","Click see more comics")
+    }
+
+    override fun onClickItemSearch(searchId: Int) {
+        Log.i("HOME_VIEW_MODEL","$searchId clickME searches")
+
+    }
+
+    override fun onclickSeeMoreSearches() {
+        Log.i("HOME_VIEW_MODEL","Click see more searches")
     }
 }

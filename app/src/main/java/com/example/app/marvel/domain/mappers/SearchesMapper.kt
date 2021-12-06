@@ -14,6 +14,7 @@ class SearchesMapper @Inject constructor()
         Searches(
             id = input.id,
             imageUrl = input.imageUrl,
+            name = input.name,
             type = input.type
         )
 
@@ -22,6 +23,7 @@ class SearchesMapper @Inject constructor()
             id = input.id,
             imageUrl = input.imageUrl,
             type = input.type,
+            name= input.name,
             date = Date()
         )
 }
