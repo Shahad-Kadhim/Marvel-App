@@ -1,5 +1,6 @@
 package com.example.app.marvel.ui.home
 
+import android.util.Log
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.app.marvel.domain.MarvelRepository
@@ -11,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     repository: MarvelRepository
-): BaseViewModel(){
+): BaseViewModel(), HomeInteractionListener{
     val characters = repository.getAllCharacters().asLiveData()
     val creator = repository.getAllCreators().asLiveData()
     val comic = repository.getAllComics().asLiveData()
@@ -23,5 +24,13 @@ class HomeViewModel @Inject constructor(
                 repository.refreshCharacters()
 
         }
+    }
+
+    override fun onClickCharacter(characterId: Int) {
+        Log.i("HOME_VIEW_MODEL","$characterId clickME")
+    }
+
+    override fun onclickSeeMoreCharacter() {
+        Log.i("HOME_VIEW_MODEL","Click see more characters")
     }
 }

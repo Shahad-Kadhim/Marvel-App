@@ -49,6 +49,7 @@
             android:fontFamily="@font/monda_regular400"
             android:text="@string/see_more"
             android:textColor="@color/black"
+            android:onClick="@{()-> listener.onclickSeeMoreCharacter()}"
             android:textSize="14sp"
             android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
             android:layout_marginHorizontal="16dp"

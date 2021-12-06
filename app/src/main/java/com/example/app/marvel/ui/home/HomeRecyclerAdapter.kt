@@ -1,6 +1,5 @@
 package com.example.app.marvel.ui.home
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.example.app.marvel.*
@@ -11,7 +10,6 @@ class HomeRecyclerAdapter(
     var itemsHome: MutableList<HomeItem>,
     private val listener: HomeInteractionListener,
 ): BaseRecyclerAdapter<HomeItem>(itemsHome, listener) {
-
 
     override var layoutId: Int =0
 
@@ -123,4 +121,12 @@ class HomeRecyclerAdapter(
     }
 }
 
-interface HomeInteractionListener: BaseInteractionListener
+interface HomeInteractionListener: BaseInteractionListener {
+
+    fun onClickCharacter(characterId: Int)
+
+    fun onclickSeeMoreCharacter()
+
+}
+
+

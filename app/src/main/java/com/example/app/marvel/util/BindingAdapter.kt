@@ -9,10 +9,8 @@ import com.example.app.marvel.domain.models.Character
 import com.example.app.marvel.domain.models.Comic
 import com.example.app.marvel.domain.models.Creator
 import com.example.app.marvel.domain.models.Searches
-import com.example.app.marvel.ui.base.BaseRecyclerAdapter
 import com.example.app.marvel.ui.home.HomeItem
 import com.example.app.marvel.ui.home.HomeRecyclerAdapter
-import com.mig35.carousellayoutmanager.CarouselLayoutManager
 
 
 @BindingAdapter(value = ["app:characters"])

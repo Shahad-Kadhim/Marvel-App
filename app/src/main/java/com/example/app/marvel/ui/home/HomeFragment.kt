@@ -8,7 +8,7 @@ import com.example.app.marvel.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment: BaseFragment<FragmentHomeBinding , HomeViewModel>() ,HomeInteractionListener{
+class HomeFragment: BaseFragment<FragmentHomeBinding , HomeViewModel>() {
 
     override val layoutId: Int =R.layout.fragment_home
     override val viewModelClass: Class<HomeViewModel> =HomeViewModel::class.java
@@ -23,7 +23,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding , HomeViewModel>() ,HomeInt
                 HomeItem.Comics(mutableListOf()),
                 HomeItem.RecentSearches(mutableListOf())
             ),
-            this)
+            viewModel)
 
     }
 }
