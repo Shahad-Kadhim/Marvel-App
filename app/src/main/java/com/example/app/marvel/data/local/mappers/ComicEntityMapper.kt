@@ -2,7 +2,7 @@ package com.example.app.marvel.data.local.mappers
 
 import com.example.app.marvel.data.local.entities.ComicEntity
 import com.example.app.marvel.data.remote.response.ComicsDto
-import com.example.app.marvel.util.Mapper
+import com.example.app.marvel.util.*
 import javax.inject.Inject
 
 class ComicEntityMapper @Inject constructor(): Mapper<ComicsDto,ComicEntity> {
@@ -12,7 +12,7 @@ class ComicEntityMapper @Inject constructor(): Mapper<ComicsDto,ComicEntity> {
             id = input.id,
             title = input.title,
             description = input.description,
-            imageUrl = "${input.thumbnail?.path}.${input.thumbnail?.extension}".replace("http","https"),
+            imageUrl = "${input.thumbnail?.path}.${input.thumbnail?.extension}".replaceHttpWithHttps(),
             lastDateModify = input.modified
         )
 

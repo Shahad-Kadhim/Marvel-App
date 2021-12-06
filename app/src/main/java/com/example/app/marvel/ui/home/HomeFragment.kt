@@ -6,7 +6,7 @@ import android.view.View
 import com.example.app.marvel.R
 import com.example.app.marvel.databinding.FragmentHomeBinding
 import com.example.app.marvel.ui.base.BaseFragment
-import com.example.app.marvel.util.EventObserver
+import com.example.app.marvel.util.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,9 +23,9 @@ class HomeFragment: BaseFragment<FragmentHomeBinding , HomeViewModel>() {
 
     private fun observeEvents() {
         // nav search fragment with shared element
-        viewModel.clickSearchEvent.observe(this,EventObserver{
+        viewModel.clickSearchEvent.observeEvent(this){
             Log.i("HOME_FRAGMENT","click search")
-        })
+        }
     }
 
     private fun setupRecyclerAdapter() {

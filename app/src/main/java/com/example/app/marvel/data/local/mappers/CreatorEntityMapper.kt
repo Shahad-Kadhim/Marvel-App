@@ -2,7 +2,7 @@ package com.example.app.marvel.data.local.mappers
 
 import com.example.app.marvel.data.local.entities.CreatorEntity
 import com.example.app.marvel.data.remote.response.CreatorDto
-import com.example.app.marvel.util.Mapper
+import com.example.app.marvel.util.*
 import javax.inject.Inject
 
 class CreatorEntityMapper @Inject constructor(): Mapper<CreatorDto, CreatorEntity> {
@@ -11,7 +11,7 @@ class CreatorEntityMapper @Inject constructor(): Mapper<CreatorDto, CreatorEntit
         CreatorEntity(
             id = input.id,
             name =input.fullName,
-            imageUrl = "${input.thumbnail?.path}.${input.thumbnail?.extension}".replace("http","https"),
+            imageUrl = "${input.thumbnail?.path}.${input.thumbnail?.extension}".replaceHttpWithHttps(),
             lastModify = input.modified
         )
 

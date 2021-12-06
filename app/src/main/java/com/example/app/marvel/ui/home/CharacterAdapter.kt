@@ -1,6 +1,5 @@
 package com.example.app.marvel.ui.home
 
-import android.util.Log
 import com.example.app.marvel.R
 import com.example.app.marvel.domain.models.Character
 import com.example.app.marvel.ui.base.BaseRecyclerAdapter

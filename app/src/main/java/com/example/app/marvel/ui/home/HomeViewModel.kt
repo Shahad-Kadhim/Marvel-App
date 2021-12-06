@@ -1,10 +1,7 @@
 package com.example.app.marvel.ui.home
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.app.marvel.domain.MarvelRepository
 import com.example.app.marvel.ui.base.BaseViewModel
 import com.example.app.marvel.util.Event

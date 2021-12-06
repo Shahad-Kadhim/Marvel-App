@@ -1,6 +1,5 @@
 package com.example.app.marvel.data.remote
 
-
 import android.util.Log
 import com.example.app.marvel.domain.MarvelRepository
 import com.example.app.marvel.data.local.MarvelDao
