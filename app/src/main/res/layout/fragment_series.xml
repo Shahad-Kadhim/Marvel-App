@@ -44,11 +44,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/back_button" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:showIfEmpty="@{viewModel.series}"
+            app:lottie_rawRes="@raw/empty_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            app:hideIfEmpty="@{viewModel.series}"
             android:orientation="vertical"
             app:items="@{viewModel.series}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

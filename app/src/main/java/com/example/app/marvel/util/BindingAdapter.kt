@@ -1,7 +1,9 @@
 package com.example.app.marvel.util
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -70,4 +72,14 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
 @BindingAdapter(value = ["app:rate"])
 fun setRate(view: RatingBar, value:String?){
     view.rating = value?.getRate() ?: 0f
+}
+
+@BindingAdapter(value = ["app:hideIfEmpty"])
+fun <T> hideWhenEmpty(view: View, items: List<T>?) {
+    view.isVisible= items?.isNotEmpty() ?: false
+}
+
+@BindingAdapter(value = ["app:showIfEmpty"])
+fun <T> showWhenEmpty(view: View, items: List<T>?) {
+    view.isVisible= items?.isEmpty() ?: false
 }

@@ -20,7 +20,7 @@ class SeriesViewModel @Inject constructor(
     private val _clickBackEvent = MutableLiveData<Event<Boolean>>()
     val clickBackEvent: LiveData<Event<Boolean>> = _clickBackEvent
 
-    val _clickSeriesEvent =MutableLiveData<Event<Int>>()
+    private val _clickSeriesEvent =MutableLiveData<Event<Int>>()
     val clickSeriesEvent: LiveData<Event<Int>> = _clickSeriesEvent
 
     val series =repository.getSeries().asLiveData()
