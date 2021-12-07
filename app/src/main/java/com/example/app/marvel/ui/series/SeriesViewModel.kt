@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SeriesViewModel @Inject constructor(
     repository: MarvelRepository
-): BaseViewModel() {
+): BaseViewModel(), SeriesInteractionListener {
 
     val series =repository.getSeries().asLiveData()
 

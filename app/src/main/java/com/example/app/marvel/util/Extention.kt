@@ -20,3 +20,6 @@ fun <T> LiveData<Event<T>>.observeEvent(owner: LifecycleOwner, function:(T) ->Un
 
 fun String.replaceHttpWithHttps() =
     this.replace("http","https")
+
+fun String.getRate() =
+    this.count { it == '+' }.toFloat() + 1

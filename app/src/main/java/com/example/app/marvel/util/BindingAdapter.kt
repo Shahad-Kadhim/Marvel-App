@@ -1,15 +1,17 @@
 package com.example.app.marvel.util
 
 import android.widget.ImageView
+import android.widget.RatingBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.app.marvel.domain.models.*
+import com.example.app.marvel.ui.base.BaseRecyclerAdapter
 import com.example.app.marvel.ui.home.*
 
 
 @BindingAdapter(value = ["app:characters"])
-fun setRecyclerItems(view: RecyclerView, character: List<Character>?) {
+fun setCharacterItems(view: RecyclerView, character: List<Character>?) {
     (view.adapter as HomeRecyclerAdapter?)?.let {
         character?.takeIf { it.isNotEmpty() }?.let { listItems ->
             it.setItemsAsPosition(HomeItem.Characters(listItems.toMutableList()), 0)
@@ -55,4 +57,17 @@ fun setImage(view: ImageView, url: String?) {
             .centerCrop()
             .into(view)
     }
+}
+
+@BindingAdapter(value = ["app:items"])
+fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
+    items?.let { listItems ->
+        (view.adapter as BaseRecyclerAdapter<T>?)
+            ?.setItems(listItems)
+    }
+}
+
+@BindingAdapter(value = ["app:rate"])
+fun setRate(view: RatingBar, value:String?){
+    view.rating = value?.getRate() ?: 0f
 }
