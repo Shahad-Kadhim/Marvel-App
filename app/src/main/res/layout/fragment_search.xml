@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.app.marvel.ui.search.SearchViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9F9">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="56dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back_button"
+            style="@style/ButtonBack"
+            android:background="@drawable/back"
+            android:elevation="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            style="@style/SearchBarStyle"
+            android:layout_marginHorizontal="8dp"
+            android:background="@drawable/rounded_search"
+            android:imeOptions="actionSearch"
+            android:paddingVertical="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="32dp"
+            android:text="@={viewModel.searchName}"
+            app:layout_constraintBottom_toBottomOf="@+id/back_button"
+            app:layout_constraintEnd_toStartOf="@+id/search_type"
+            app:layout_constraintStart_toEndOf="@+id/back_button"
+            app:layout_constraintTop_toTopOf="@+id/back_button"
+            app:onclickSearch="@{viewModel::onSearchClick}" />
+
+
+        <Spinner
+            android:id="@+id/search_type"
+            android:layout_width="36dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="8dp"
+            selectedItem="@={viewModel.typeSearch}"
+            android:entries="@array/search_type"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/back_button" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/searching_lottie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/searching"
+            app:hiddenOnState="@{viewModel.searchResult}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/loading"
+            app:showOnLoading="@{viewModel.searchResult}" />
+
+        <include
+            android:id="@+id/error"
+            layout="@layout/error"
+            app:showOnError="@{viewModel.searchResult}" />
+
+        <include
+            android:id="@+id/not_found"
+            layout="@layout/no_items"
+            app:showIfEmpty="@{viewModel.searchResult.toData()}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_type">
+        <item>Character</item>
+        <item>Creator</item>
+        <item>Comic</item>
+        <item>Series</item>
+        <item>Story</item>
+
+    </string-array>
+</resources>

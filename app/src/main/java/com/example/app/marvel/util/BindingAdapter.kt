@@ -1,12 +1,14 @@
 package com.example.app.marvel.util
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.RatingBar
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingAdapter
+import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.app.marvel.data.State
 import com.example.app.marvel.domain.models.*
 import com.example.app.marvel.ui.base.BaseRecyclerAdapter
 import com.example.app.marvel.ui.home.*
@@ -82,4 +84,56 @@ fun <T> hideWhenEmpty(view: View, items: List<T>?) {
 @BindingAdapter(value = ["app:showIfEmpty"])
 fun <T> showWhenEmpty(view: View, items: List<T>?) {
     view.isVisible= items?.isEmpty() ?: false
+}
+@BindingAdapter(value = ["app:onclickSearch"])
+fun onclickSearch(view: EditText, function: () -> Unit) {
+    view.setOnEditorActionListener { _, _, _ ->
+        function()
+        return@setOnEditorActionListener false
+    }
+}
+
+
+@BindingAdapter(value = ["selectedItem"], requireAll = false)
+fun bindSpinnerData(
+    spinner: Spinner,
+    newSelectedValue: String?,
+) {
+    newSelectedValue?.let {
+        val pos = spinner.selectedItemPosition
+        spinner.setSelection(pos, true)
+    }
+}
+
+@InverseBindingAdapter(attribute = "selectedItem", event = "selectedItemAttrChanged")
+fun captureSelectedValue(spinner: Spinner): String {
+    return spinner.selectedItem.toString()
+}
+
+@BindingAdapter("selectedItemAttrChanged")
+fun onChange(spinner: Spinner, attChange: InverseBindingListener){
+    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+            attChange.onChange()
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
+    }
+}
+
+
+@BindingAdapter(value = ["app:showOnError"])
+fun <T> showOnError(view: View, state: State<T>?) {
+    view.isVisible = (state is State.Error)
+}
+
+@BindingAdapter(value = ["app:showOnLoading"])
+fun <T> showOnLoading(view: View, state: State<T>?) {
+    view.isVisible = (state is State.Loading)
+}
+
+
+@BindingAdapter(value = ["app:hiddenOnState"])
+fun <T> hiddenWhenState(view: View, state: State<T>?) {
+    view.isVisible = (state !is State)
 }
