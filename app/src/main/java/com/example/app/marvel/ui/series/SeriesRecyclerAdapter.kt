@@ -19,4 +19,5 @@ class SeriesRecyclerAdapter(items: List<Series>, listener: SeriesInteractionList
 
 interface SeriesInteractionListener: BaseInteractionListener {
 
+    fun onClickSeries( seriesId: Int)
 }

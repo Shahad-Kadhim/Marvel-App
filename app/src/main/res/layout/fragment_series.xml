@@ -25,6 +25,7 @@
             style="@style/ButtonBack"
             android:background="@drawable/back"
             android:elevation="8dp"
+            android:onClick="@{() -> viewModel.onClickBack()}"
             app:layout_constraintBottom_toBottomOf="@id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
