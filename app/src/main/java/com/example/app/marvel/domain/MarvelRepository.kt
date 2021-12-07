@@ -23,6 +23,6 @@ interface MarvelRepository{
 
     fun getSeries(): Flow<List<Series>>
 
-    suspend fun refersSeries()
+    suspend fun refersSeries(limit: Int = 20)
 
 }

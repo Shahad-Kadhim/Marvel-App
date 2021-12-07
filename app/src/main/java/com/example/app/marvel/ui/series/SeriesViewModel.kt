@@ -27,7 +27,7 @@ class SeriesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.refersSeries()
+            repository.refersSeries(99)
         }
     }
 

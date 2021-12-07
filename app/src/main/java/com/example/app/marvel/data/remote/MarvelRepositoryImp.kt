@@ -1,6 +1,7 @@
 package com.example.app.marvel.data.remote
 
 import android.util.Log
+import androidx.viewpager2.widget.ViewPager2
 import com.example.app.marvel.domain.MarvelRepository
 import com.example.app.marvel.data.local.MarvelDao
 import com.example.app.marvel.data.local.mappers.*
@@ -89,8 +90,12 @@ class MarvelRepositoryImp @Inject constructor(
         )
 
 
-    override suspend fun refersSeries() {
-        refreshWrapper(api::getSeries, dao::addSeries)
+    override suspend fun refersSeries(limit: Int) {
+        refreshWrapper(
+            {
+                api.getSeries(limit)
+            }
+            , dao::addSeries)
         { body ->
             body?.data?.results?.map { seriesDto ->
                 localMappers.seriesEntityMapper.map(seriesDto)
