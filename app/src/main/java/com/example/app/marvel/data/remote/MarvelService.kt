@@ -10,7 +10,7 @@ interface MarvelService{
     @GET("characters")
     suspend fun getCharacters(
         @Query("limit") numberOfCharacters: Int = 20,
-        @Query("nameStartsWith") searchKeyWord: String = " ",
+        @Query("nameStartsWith") searchKeyWord: String? = null,
 
     ): Response<MarvelResponse<CharacterDto>>
 
@@ -24,7 +24,7 @@ interface MarvelService{
     @GET("creators")
     suspend fun getCreators(
         @Query("limit") numberOfCharacters: Int = 20,
-        @Query("nameStartsWith") searchKeyWord: String = " ",
+        @Query("nameStartsWith") searchKeyWord: String? = null,
         ): Response<MarvelResponse<CreatorDto>>
 
 
@@ -37,7 +37,6 @@ interface MarvelService{
     @GET("events")
     suspend fun getEvent(
         @Query("limit") numberOfCharacters: Int = 20,
-        @Query("name") searchKeyWord: String = " ",
         ): Response<MarvelResponse<EventDto>>
 
 
