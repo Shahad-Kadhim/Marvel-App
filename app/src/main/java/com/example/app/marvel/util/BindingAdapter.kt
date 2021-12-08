@@ -1,6 +1,8 @@
 package com.example.app.marvel.util
 
+import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -138,4 +140,11 @@ fun <T> showOnLoading(view: View, state: State<T>?) {
 @BindingAdapter(value = ["app:hiddenOnState"])
 fun <T> hiddenWhenState(view: View, state: State<T>?) {
     view.isVisible = (state !is State)
+}
+
+@BindingAdapter(value = ["app:setFocus"])
+fun setFocus(view: EditText, value: Boolean) {
+    view.requestFocus()
+    (view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+        .showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
 }
