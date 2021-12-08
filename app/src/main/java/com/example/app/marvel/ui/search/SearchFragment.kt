@@ -6,6 +6,7 @@ import android.view.View
 import com.example.app.marvel.R
 import com.example.app.marvel.databinding.FragmentSearchBinding
 import com.example.app.marvel.ui.base.BaseFragment
+import com.example.app.marvel.util.goToFragment
 import com.example.app.marvel.util.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +33,9 @@ class SearchFragment: BaseFragment<FragmentSearchBinding,SearchViewModel>() {
         viewModel.clickSearchItemEvent.observeEvent(this){
             when(it.type){
                 SearchType.CHARACTERS -> {
-                    //nav to detail character
+                    binding.root.goToFragment(
+                        SearchFragmentDirections.actionSearchFragmentToCharacterDetailsFragment(it.id)
+                    )
                 }
                 SearchType.CREATORS -> {
                     // nav to detail creator

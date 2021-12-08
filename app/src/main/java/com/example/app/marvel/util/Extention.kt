@@ -1,17 +1,11 @@
 package com.example.app.marvel.util
 
 import android.view.View
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.navigation.NavDirections
-import androidx.navigation.Navigation
+import androidx.lifecycle.*
+import androidx.navigation.*
 import androidx.navigation.fragment.FragmentNavigator
 import com.example.app.marvel.data.State
-import com.example.app.marvel.data.remote.response.CharacterDto
-import com.example.app.marvel.data.remote.response.CreatorDto
-import com.example.app.marvel.data.remote.response.Thumbnail
-import com.example.app.marvel.domain.models.Character
-import com.example.app.marvel.domain.models.Creator
+import com.example.app.marvel.data.remote.response.*
 import com.example.app.marvel.domain.models.Searches
 import com.example.app.marvel.ui.search.SearchType
 import java.math.BigInteger
@@ -56,7 +50,7 @@ fun State<List<CreatorDto>?>.creatorToSearches() =
     }
 
 fun CreatorDto.toSearchClass() =
-    Searches(id,thumbnail.toImageUrl(),name,SearchType.CHARACTERS)
+    Searches(id,thumbnail.toImageUrl(),name,SearchType.CREATORS)
 
 
 fun State<List<CharacterDto>?>.characterToSearches() =

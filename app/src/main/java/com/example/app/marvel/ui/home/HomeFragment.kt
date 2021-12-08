@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.app.marvel.R
 import com.example.app.marvel.databinding.FragmentHomeBinding
 import com.example.app.marvel.ui.base.BaseFragment
+import com.example.app.marvel.ui.search.SearchType
 import com.example.app.marvel.util.Constants
 import com.example.app.marvel.util.goToFragment
 import com.example.app.marvel.util.goToFragmentWithTransition
@@ -49,7 +50,14 @@ class HomeFragment: BaseFragment<FragmentHomeBinding , HomeViewModel>() {
 
             }
             clickSearchItemEvent.observeEvent(this@HomeFragment){
+                when(it.type){
+                    SearchType.CHARACTERS -> {
+                        navTo(HomeFragmentDirections.actionHomeFragmentToCharacterDetailsFragment(it.id))
+                    }
+                    SearchType.CREATORS -> {
 
+                    }
+                }
             }
             clickSeeMoreCharacterEvent.observeEvent(this@HomeFragment){
 
