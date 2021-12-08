@@ -81,3 +81,8 @@ fun Thumbnail?.toImageUrl()=
 fun View.goToFragmentWithTransition(navDir: NavDirections, extra: FragmentNavigator.Extras) {
     Navigation.findNavController(this).navigate(navDir,extra)
 }
+
+
+fun View.goToFragment(navDir: NavDirections) {
+    Navigation.findNavController(this).navigate(navDir)
+}

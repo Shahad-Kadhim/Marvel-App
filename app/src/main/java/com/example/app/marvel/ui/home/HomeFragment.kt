@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.cardview.widget.CardView
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.example.app.marvel.R
 import com.example.app.marvel.databinding.FragmentHomeBinding
 import com.example.app.marvel.ui.base.BaseFragment
 import com.example.app.marvel.util.Constants
+import com.example.app.marvel.util.goToFragment
 import com.example.app.marvel.util.goToFragmentWithTransition
 import com.example.app.marvel.util.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,19 +30,21 @@ class HomeFragment: BaseFragment<FragmentHomeBinding , HomeViewModel>() {
 
     private fun observeEvents() {
         with(viewModel){
-            // nav search fragment with shared element
             clickSearchEvent.observeEvent(this@HomeFragment){
                 binding.root.goToFragmentWithTransition(
                     HomeFragmentDirections.actionHomeFragmentToSearchFragment(),
                     FragmentNavigatorExtras(binding.search to Constants.SEARCH_KEY)
                 )
             }
-            clickCharacterItemEvent.observeEvent(this@HomeFragment){
 
+            clickCharacterItemEvent.observeEvent(this@HomeFragment){
+                navTo(HomeFragmentDirections.actionHomeFragmentToCharacterDetailsFragment(it))
             }
+
             clickCreatorItemEvent.observeEvent(this@HomeFragment){
 
             }
+
             clickComicItemEvent.observeEvent(this@HomeFragment){
 
             }
@@ -60,6 +65,11 @@ class HomeFragment: BaseFragment<FragmentHomeBinding , HomeViewModel>() {
             }
         }
     }
+
+    private fun navTo(action: NavDirections) {
+        binding.root.goToFragment(action)
+    }
+
 
     private fun setupRecyclerAdapter() {
         binding.recycle.adapter= HomeRecyclerAdapter(

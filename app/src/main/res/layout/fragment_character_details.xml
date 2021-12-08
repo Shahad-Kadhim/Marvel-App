@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.app.marvel.ui.charctorDetails.CharacterDetailsViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="56dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back_button"
+            style="@style/ButtonBack"
+            android:background="@drawable/back"
+            android:elevation="8dp"
+            android:alpha="0.6"
+            android:onClick="@{() -> viewModel.onClickBack()}"
+            app:layout_constraintBottom_toBottomOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            app:imageFromThumbnail="@{viewModel.characterR.thumbnail}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/test_image" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/monda_bold"
+                    android:text="@{viewModel.characterR.name}"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="SUPER HERO Name" />
+
+                <TextView
+                    android:id="@+id/descrpition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/monda_regular400"
+                    android:text="@{viewModel.characterR.description}"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    tools:text="SUPER HERO Name" />
+
+
+                <TextView
+                    android:id="@+id/series"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/monda_bold"
+                    android:text="Series"
+                    android:textColor="@color/black"
+                    app:hideIfEmpty="@{viewModel.characterR.series.items}"
+
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/descrpition"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/series_recycle"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    app:hideIfEmpty="@{viewModel.characterR.series.items}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:items="@{viewModel.characterR.series.items}"
+                    android:layout_height="200dp"
+                    android:layout_margin="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/series"
+                    tools:listitem="@layout/summary_item" />
+
+                <TextView
+                    android:id="@+id/events"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/monda_bold"
+                    android:text="Events"
+                    app:hideIfEmpty="@{viewModel.characterR.events.items}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/series_recycle" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/event_recycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    tools:listitem="@layout/summary_item"
+                    android:orientation="vertical"
+                    app:hideIfEmpty="@{viewModel.characterR.events.items}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:items="@{viewModel.characterR.events.items}"
+                    android:layout_margin="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/events" />
+                <TextView
+                    android:id="@+id/comic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/monda_bold"
+                    android:text="Comics"
+                    app:hideIfEmpty="@{viewModel.characterR.comics.items}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_recycle" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comic_recycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    app:hideIfEmpty="@{viewModel.characterR.comics.items}"
+                    app:items="@{viewModel.characterR.comics.items}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/comic"
+                    tools:listitem="@layout/summary_item" />
+                <TextView
+                    android:id="@+id/stories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/monda_bold"
+                    android:text="Stroies"
+                    app:hideIfEmpty="@{viewModel.characterR.stories.items}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/comic_recycle" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/story_recycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    app:hideIfEmpty="@{viewModel.characterR.stories.items}"
+                    app:items="@{viewModel.characterR.stories.items}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/stories"
+                    tools:listitem="@layout/story_item" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

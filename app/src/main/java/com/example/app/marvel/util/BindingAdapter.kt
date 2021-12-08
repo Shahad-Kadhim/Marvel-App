@@ -11,6 +11,7 @@ import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.app.marvel.data.State
+import com.example.app.marvel.data.remote.response.Thumbnail
 import com.example.app.marvel.domain.models.*
 import com.example.app.marvel.ui.base.BaseRecyclerAdapter
 import com.example.app.marvel.ui.home.*
@@ -56,6 +57,7 @@ fun setSearchesItems(view: RecyclerView,searches: List<Searches>?) {
 
 
 
+
 @BindingAdapter(value = ["app:imageFromUrl"])
 fun setImage(view: ImageView, url: String?) {
     url?.let { imageUrl ->
@@ -63,6 +65,15 @@ fun setImage(view: ImageView, url: String?) {
             .load(imageUrl)
             .centerCrop()
             .into(view)
+    }
+}
+
+
+
+@BindingAdapter(value = ["app:imageFromThumbnail"])
+fun imageFromThumbnail(view: ImageView, thumbnail: Thumbnail?) {
+    thumbnail?.let { thumbail ->
+        setImage(view,thumbail.toImageUrl())
     }
 }
 
