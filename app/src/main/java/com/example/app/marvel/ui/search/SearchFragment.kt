@@ -5,6 +5,7 @@ import android.view.View
 import com.example.app.marvel.R
 import com.example.app.marvel.databinding.FragmentSearchBinding
 import com.example.app.marvel.ui.base.BaseFragment
+import com.example.app.marvel.util.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,11 +21,19 @@ class SearchFragment: BaseFragment<FragmentSearchBinding,SearchViewModel>() {
     }
 
     private fun observeEvents() {
-
+        viewModel.clickSearchItemEvent.observeEvent(this){
+            when(it.type){
+                SearchType.CHARACTERS -> {
+                    //nav to detail character
+                }
+                SearchType.CREATORS -> {
+                    // nav to detail creator
+                }
+            }
+        }
     }
 
     private fun setupRecyclerAdapter() {
         binding.recycle.adapter= SearchAdapter(mutableListOf(), viewModel)
-
     }
 }

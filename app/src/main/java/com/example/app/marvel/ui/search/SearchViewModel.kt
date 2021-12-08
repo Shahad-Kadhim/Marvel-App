@@ -5,6 +5,7 @@ import com.example.app.marvel.data.State
 import com.example.app.marvel.domain.MarvelRepository
 import com.example.app.marvel.domain.models.Searches
 import com.example.app.marvel.ui.base.BaseViewModel
+import com.example.app.marvel.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -20,6 +21,9 @@ class SearchViewModel @Inject constructor(
 
     private val _searchResult= MutableLiveData<State<List<Searches?>>>()
     val searchResult: LiveData<State<List<Searches?>>> = _searchResult
+
+    private val _clickSearchItemEvent =MutableLiveData<Event<Searches>>()
+    val clickSearchItemEvent: LiveData<Event<Searches>> = _clickSearchItemEvent
 
     fun onSearchClick(){
             when (typeSearch.value) {
@@ -40,7 +44,16 @@ class SearchViewModel @Inject constructor(
     }
 
     override fun onClickItem(itemId: Int) {
+        searchResult.value?.toData()?.firstOrNull{ it?.id ==itemId }?.let{ searchItem ->
+            insertSearchItem(searchItem)
+            _clickSearchItemEvent.postValue(Event(searchItem))
+        }
+    }
 
+    private fun insertSearchItem(item: Searches) {
+        viewModelScope.launch {
+                repository.addSearch(item)
+            }
     }
 
 }
