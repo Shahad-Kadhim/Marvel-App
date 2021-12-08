@@ -3,9 +3,13 @@ package com.example.app.marvel.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.cardview.widget.CardView
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.example.app.marvel.R
 import com.example.app.marvel.databinding.FragmentHomeBinding
 import com.example.app.marvel.ui.base.BaseFragment
+import com.example.app.marvel.util.Constants
+import com.example.app.marvel.util.goToFragmentWithTransition
 import com.example.app.marvel.util.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +29,10 @@ class HomeFragment: BaseFragment<FragmentHomeBinding , HomeViewModel>() {
         with(viewModel){
             // nav search fragment with shared element
             clickSearchEvent.observeEvent(this@HomeFragment){
-                Log.i("HOME_FRAGMENT","click search")
+                binding.root.goToFragmentWithTransition(
+                    HomeFragmentDirections.actionHomeFragmentToSearchFragment(),
+                    FragmentNavigatorExtras(binding.search to Constants.SEARCH_KEY)
+                )
             }
             clickCharacterItemEvent.observeEvent(this@HomeFragment){
 

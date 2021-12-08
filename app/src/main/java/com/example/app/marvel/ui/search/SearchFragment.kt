@@ -1,6 +1,7 @@
 package com.example.app.marvel.ui.search
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.View
 import com.example.app.marvel.R
 import com.example.app.marvel.databinding.FragmentSearchBinding
@@ -13,6 +14,13 @@ class SearchFragment: BaseFragment<FragmentSearchBinding,SearchViewModel>() {
     override val layoutId: Int =R.layout.fragment_search
     override val viewModelClass: Class<SearchViewModel> =SearchViewModel::class.java
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition =
+            TransitionInflater
+                .from(context)
+                .inflateTransition(android.R.transition.move)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

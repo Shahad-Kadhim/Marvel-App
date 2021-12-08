@@ -27,10 +27,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/search"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:transitionName="search"
             android:layout_marginHorizontal="16dp"
-            android:src="@drawable/ic_search"
+            android:src="@drawable/ic_search_bar"
             android:onClick="@{() -> viewModel.onClickSearch()}"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"

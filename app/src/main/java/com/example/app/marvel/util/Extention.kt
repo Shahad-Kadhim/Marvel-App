@@ -1,7 +1,11 @@
 package com.example.app.marvel.util
 
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigator
 import com.example.app.marvel.data.State
 import com.example.app.marvel.data.remote.response.CharacterDto
 import com.example.app.marvel.data.remote.response.CreatorDto
@@ -73,3 +77,7 @@ fun CharacterDto.toSearchClass() =
 fun Thumbnail?.toImageUrl()=
     "${this?.path}.${this?.extension}".replaceHttpWithHttps()
 
+
+fun View.goToFragmentWithTransition(navDir: NavDirections, extra: FragmentNavigator.Extras) {
+    Navigation.findNavController(this).navigate(navDir,extra)
+}
