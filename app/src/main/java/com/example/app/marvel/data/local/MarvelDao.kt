@@ -2,6 +2,7 @@ package com.example.app.marvel.data.local
 
 import androidx.room.*
 import com.example.app.marvel.data.local.entities.*
+import com.example.app.marvel.domain.models.Searches
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -45,5 +46,8 @@ interface MarvelDao{
 
     @Query("SELECT * FROM EventEntity ORDER BY dataModify DESC")
     fun getEvent(): Flow<List<EventEntity>>
+
+    @Query("SELECT * FROM SearchesEntity WHERE id == :searchesId")
+    suspend fun getSearchesById(searchesId: Int): SearchesEntity
 
 }

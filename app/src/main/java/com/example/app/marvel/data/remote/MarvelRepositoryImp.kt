@@ -162,6 +162,10 @@ class MarvelRepositoryImp @Inject constructor(
             it.characterToSearches()
         }
 
+    override suspend fun getSearchesItemById(searchesId: Int): Searches =
+        domainMapper.searchesMapper.map(dao.getSearchesById(searchesId))
+
+
     override fun searchCreator(searchKeyWord: String) =
         wrapWithFlow {
             api.getCreators(

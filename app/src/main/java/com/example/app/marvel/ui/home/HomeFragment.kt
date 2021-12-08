@@ -22,9 +22,35 @@ class HomeFragment: BaseFragment<FragmentHomeBinding , HomeViewModel>() {
     }
 
     private fun observeEvents() {
-        // nav search fragment with shared element
-        viewModel.clickSearchEvent.observeEvent(this){
-            Log.i("HOME_FRAGMENT","click search")
+        with(viewModel){
+            // nav search fragment with shared element
+            clickSearchEvent.observeEvent(this@HomeFragment){
+                Log.i("HOME_FRAGMENT","click search")
+            }
+            clickCharacterItemEvent.observeEvent(this@HomeFragment){
+
+            }
+            clickCreatorItemEvent.observeEvent(this@HomeFragment){
+
+            }
+            clickComicItemEvent.observeEvent(this@HomeFragment){
+
+            }
+            clickSearchItemEvent.observeEvent(this@HomeFragment){
+
+            }
+            clickSeeMoreCharacterEvent.observeEvent(this@HomeFragment){
+
+            }
+            clickSeeMoreComicEvent.observeEvent(this@HomeFragment){
+
+            }
+            clickSeeMoreCreatorEvent.observeEvent(this@HomeFragment){
+
+            }
+            clickSeeMoreSearchesEvent.observeEvent(this@HomeFragment){
+
+            }
         }
     }
 

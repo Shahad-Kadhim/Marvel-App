@@ -31,6 +31,8 @@ interface MarvelRepository{
     suspend fun refersEvents(limit: Int = 20)
 
     fun searchCreator(searchKeyWord: String): Flow<State<List<Searches?>>>
+
     fun searchCharacter(searchKeyWord: String): Flow<State<List<Searches?>>>
 
+    suspend fun getSearchesItemById(searchesId: Int): Searches
 }

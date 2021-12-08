@@ -3,6 +3,7 @@ package com.example.app.marvel.ui.home
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.app.marvel.domain.MarvelRepository
+import com.example.app.marvel.domain.models.Searches
 import com.example.app.marvel.ui.base.BaseViewModel
 import com.example.app.marvel.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,11 +12,35 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    repository: MarvelRepository
+    private val repository: MarvelRepository
 ): BaseViewModel(), HomeInteractionListener{
 
     private val _clickSearchEvent = MutableLiveData<Event<Boolean>>()
     val clickSearchEvent: LiveData<Event<Boolean>> = _clickSearchEvent
+
+    private val _clickSeeMoreCharacterEvent = MutableLiveData<Event<Boolean>>()
+    val clickSeeMoreCharacterEvent: LiveData<Event<Boolean>> = _clickSeeMoreCharacterEvent
+
+    private val _clickSeeMoreCreatorEvent = MutableLiveData<Event<Boolean>>()
+    val clickSeeMoreCreatorEvent: LiveData<Event<Boolean>> = _clickSeeMoreCreatorEvent
+
+    private val _clickSeeMoreComicEvent = MutableLiveData<Event<Boolean>>()
+    val clickSeeMoreComicEvent: LiveData<Event<Boolean>> = _clickSeeMoreComicEvent
+
+    private val _clickSeeMoreSearchesEvent = MutableLiveData<Event<Boolean>>()
+    val clickSeeMoreSearchesEvent: LiveData<Event<Boolean>> = _clickSeeMoreSearchesEvent
+
+    private val _clickSearchItemEvent =MutableLiveData<Event<Searches>>()
+    val clickSearchItemEvent: LiveData<Event<Searches>> = _clickSearchItemEvent
+
+    private val _clickCharacterItemEvent =MutableLiveData<Event<Int>>()
+    val clickCharacterItemEvent: LiveData<Event<Int>> = _clickCharacterItemEvent
+
+    private val _clickCreatorItemEvent =MutableLiveData<Event<Int>>()
+    val clickCreatorItemEvent: LiveData<Event<Int>> = _clickCreatorItemEvent
+
+    private val _clickComicItemEvent =MutableLiveData<Event<Int>>()
+    val clickComicItemEvent: LiveData<Event<Int>> = _clickComicItemEvent
 
     val characters = repository.getAllCharacters().asLiveData()
     val creator = repository.getAllCreators().asLiveData()
@@ -27,7 +52,6 @@ class HomeViewModel @Inject constructor(
                 repository.refreshCreators()
                 repository.refreshComics()
                 repository.refreshCharacters()
-
         }
     }
 
@@ -37,37 +61,40 @@ class HomeViewModel @Inject constructor(
 
 
     override fun onClickCharacter(characterId: Int) {
-        Log.i("HOME_VIEW_MODEL","$characterId clickME")
+        _clickCharacterItemEvent.postValue(Event(characterId))
     }
 
     override fun onClickCreator(creatorId: Int) {
-        Log.i("HOME_VIEW_MODEL","$creatorId clickME Creator")
-
+        _clickCreatorItemEvent.postValue(Event(creatorId))
     }
 
     override fun onClickComic(comicId: Int) {
-        Log.i("HOME_VIEW_MODEL","$comicId clickME Comic")
+        _clickComicItemEvent.postValue(Event(comicId))
     }
 
     override fun onClickItemSearch(searchId: Int) {
-        Log.i("HOME_VIEW_MODEL","$searchId clickME searches")
+        viewModelScope.launch {
+            repository.getSearchesItemById(searchId).apply {
+                _clickSearchItemEvent.postValue(Event(this))
+            }
+        }
     }
 
 
     override fun onclickSeeMoreCharacter() {
-        Log.i("HOME_VIEW_MODEL","Click see more characters")
+        _clickSeeMoreCharacterEvent.postValue(Event(true))
     }
 
     override fun onclickSeeMoreCreators() {
-        Log.i("HOME_VIEW_MODEL","Click see more creator")
+        _clickSeeMoreCreatorEvent.postValue(Event(true))
     }
 
     override fun onclickSeeMoreComics() {
-        Log.i("HOME_VIEW_MODEL","Click see more comics")
+        _clickSeeMoreComicEvent.postValue(Event(true))
     }
 
     override fun onclickSeeMoreSearches() {
-        Log.i("HOME_VIEW_MODEL","Click see more searches")
+        _clickSeeMoreSearchesEvent.postValue(Event(true))
     }
 
 }
