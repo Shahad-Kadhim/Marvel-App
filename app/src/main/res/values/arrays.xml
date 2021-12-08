@@ -3,9 +3,5 @@
     <string-array name="search_type">
         <item>Character</item>
         <item>Creator</item>
-        <item>Comic</item>
-        <item>Series</item>
-        <item>Story</item>
-
     </string-array>
 </resources>

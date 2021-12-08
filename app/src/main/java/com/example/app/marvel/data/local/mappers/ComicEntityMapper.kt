@@ -12,7 +12,7 @@ class ComicEntityMapper @Inject constructor(): Mapper<ComicsDto,ComicEntity> {
             id = input.id,
             title = input.title,
             description = input.description,
-            imageUrl = "${input.thumbnail?.path}.${input.thumbnail?.extension}".replaceHttpWithHttps(),
+            imageUrl = input.thumbnail.toImageUrl(),
             lastDateModify = input.modified
         )
 

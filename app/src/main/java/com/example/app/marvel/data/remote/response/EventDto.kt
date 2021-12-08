@@ -1,34 +1,39 @@
 package com.example.app.marvel.data.remote.response
 
+
 import com.google.gson.annotations.SerializedName
 
-data class CreatorDto(
+data class EventDto(
+    @SerializedName("characters")
+    val characters: Details? = null,
     @SerializedName("comics")
     val comics: Details? = null,
-    @SerializedName("events")
-    val events: Details? = null,
-    @SerializedName("firstName")
-    val firstName: String? = null,
-    @SerializedName("fullName")
-    val name: String,
+    @SerializedName("creators")
+    val creators: Creators? = null,
+    @SerializedName("description")
+    val description: String? = null,
+    @SerializedName("end")
+    val end: String? = null,
     @SerializedName("id")
     val id: Int,
-    @SerializedName("lastName")
-    val lastName: String? = null,
-    @SerializedName("middleName")
-    val middleName: String? = null,
     @SerializedName("modified")
     val modified: String,
+    @SerializedName("next")
+    val next: Next? = null,
+    @SerializedName("previous")
+    val previous: Previous? = null,
     @SerializedName("resourceURI")
     val resourceURI: String? = null,
     @SerializedName("series")
     val series: Details? = null,
+    @SerializedName("start")
+    val start: String? = null,
     @SerializedName("stories")
     val stories: Stories? = null,
-    @SerializedName("suffix")
-    val suffix: String? = null,
     @SerializedName("thumbnail")
     val thumbnail: Thumbnail? = null,
+    @SerializedName("title")
+    val title: String,
     @SerializedName("urls")
     val urls: List<Url>? = null
 )

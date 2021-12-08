@@ -12,6 +12,7 @@ import com.example.app.marvel.data.State
 import com.example.app.marvel.domain.models.*
 import com.example.app.marvel.ui.base.BaseRecyclerAdapter
 import com.example.app.marvel.ui.home.*
+import com.example.app.marvel.ui.search.SearchType
 
 
 @BindingAdapter(value = ["app:characters"])
@@ -97,7 +98,7 @@ fun onclickSearch(view: EditText, function: () -> Unit) {
 @BindingAdapter(value = ["selectedItem"], requireAll = false)
 fun bindSpinnerData(
     spinner: Spinner,
-    newSelectedValue: String?,
+    newSelectedValue: SearchType?,
 ) {
     newSelectedValue?.let {
         val pos = spinner.selectedItemPosition
@@ -106,9 +107,10 @@ fun bindSpinnerData(
 }
 
 @InverseBindingAdapter(attribute = "selectedItem", event = "selectedItemAttrChanged")
-fun captureSelectedValue(spinner: Spinner): String {
-    return spinner.selectedItem.toString()
+fun captureSelectedValue(spinner: Spinner): SearchType {
+    return spinner.selectedItem.toString().toSearchType()
 }
+
 
 @BindingAdapter("selectedItemAttrChanged")
 fun onChange(spinner: Spinner, attChange: InverseBindingListener){

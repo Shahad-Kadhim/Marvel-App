@@ -40,4 +40,10 @@ interface MarvelDao{
     @Query("SELECT * FROM SeriesEntity ORDER BY lastDateModify DESC")
     fun getSeries(): Flow<List<SeriesEntity>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addEvent(series: List<EventEntity>)
+
+    @Query("SELECT * FROM EventEntity ORDER BY dataModify DESC")
+    fun getEvent(): Flow<List<EventEntity>>
+
 }

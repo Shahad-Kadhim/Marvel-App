@@ -1,11 +1,5 @@
 package com.example.app.marvel.data.remote.response
 
-
-import com.example.app.marvel.data.remote.response.Creators
-import com.example.app.marvel.data.remote.response.Details
-import com.example.app.marvel.data.remote.response.Stories
-import com.example.app.marvel.data.remote.response.Thumbnail
-import com.example.app.marvel.data.remote.response.Url
 import com.google.gson.annotations.SerializedName
 
 data class SeriesDto(

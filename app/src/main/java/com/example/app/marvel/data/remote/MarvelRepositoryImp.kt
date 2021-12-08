@@ -1,7 +1,6 @@
 package com.example.app.marvel.data.remote
 
 import android.util.Log
-import androidx.viewpager2.widget.ViewPager2
 import com.example.app.marvel.data.State
 import com.example.app.marvel.domain.MarvelRepository
 import com.example.app.marvel.data.local.MarvelDao
@@ -10,6 +9,8 @@ import com.example.app.marvel.data.remote.response.MarvelResponse
 import com.example.app.marvel.domain.models.Comic
 import com.example.app.marvel.domain.mappers.*
 import com.example.app.marvel.domain.models.*
+import com.example.app.marvel.util.characterToSearches
+import com.example.app.marvel.util.creatorToSearches
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
 import java.lang.Exception
@@ -104,6 +105,24 @@ class MarvelRepositoryImp @Inject constructor(
         }
     }
 
+    override fun getEvents(): Flow<List<Event>> =
+        wrapper(
+            dao.getEvent(),
+            domainMapper.eventMapper::map
+        )
+
+
+    override suspend fun refersEvents(limit: Int) {
+        refreshWrapper(
+            {
+                api.getEvent(limit)
+            }, dao::addEvent)
+        { body ->
+            body?.data?.results?.map { eventDto ->
+                localMappers.eventEntityMapper.map(eventDto)
+            }
+        }
+    }
 
     private fun <T, U> wrapper(
         data: Flow<List<T>>,
@@ -139,24 +158,17 @@ class MarvelRepositoryImp @Inject constructor(
             api.getCharacters(
                 searchKeyWord = searchKeyWord
             )
+        }.map {
+            it.characterToSearches()
         }
+
     override fun searchCreator(searchKeyWord: String) =
         wrapWithFlow {
             api.getCreators(
                 searchKeyWord = searchKeyWord
             )
-        }
-    override fun searchComic(searchKeyWord: String) =
-        wrapWithFlow {
-            api.getComics(
-                searchKeyWord = searchKeyWord
-            )
-        }
-    override fun searchSeries(searchKeyWord: String) =
-        wrapWithFlow {
-            api.getSeries(
-                searchKeyWord = searchKeyWord
-            )
+        }.map {
+            it.creatorToSearches()
         }
 
     private fun <T> wrapWithFlow(function: suspend () -> Response<MarvelResponse<T>>): Flow<State<List<T>?>> {
@@ -172,7 +184,7 @@ class MarvelRepositoryImp @Inject constructor(
 
     private fun <T> checkIsSuccessful(response: Response<MarvelResponse<T>>): State<List<T>?> =
         if (response.isSuccessful) {
-            State.Success(response.body()?.data?.results)
+            State.Success(response.body()?.data?.results )
         } else {
             State.Error(response.message())
         }

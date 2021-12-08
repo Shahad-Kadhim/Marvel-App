@@ -10,8 +10,8 @@ class CreatorEntityMapper @Inject constructor(): Mapper<CreatorDto, CreatorEntit
     override fun map(input: CreatorDto): CreatorEntity =
         CreatorEntity(
             id = input.id,
-            name =input.fullName,
-            imageUrl = "${input.thumbnail?.path}.${input.thumbnail?.extension}".replaceHttpWithHttps(),
+            name =input.name,
+            imageUrl = input.thumbnail.toImageUrl(),
             lastModify = input.modified
         )
 
