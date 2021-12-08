@@ -165,6 +165,16 @@ class MarvelRepositoryImp @Inject constructor(
     override suspend fun getSearchesItemById(searchesId: Int): Searches =
         domainMapper.searchesMapper.map(dao.getSearchesById(searchesId))
 
+    override fun getCharacterById(characterId: Int) =
+        wrapWithFlow { api.getCharacterById(characterId) }
+
+    override fun getComicById(comicId: Int) =
+        wrapWithFlow { api.getComicById(comicId) }
+
+    override fun getCreatorById(creatorId: Int) =
+        wrapWithFlow { api.getCreatorById(creatorId) }
+
+
 
     override fun searchCreator(searchKeyWord: String) =
         wrapWithFlow {

@@ -1,6 +1,5 @@
 package com.example.app.marvel.ui.home
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.app.marvel.domain.MarvelRepository
 import com.example.app.marvel.domain.models.Searches

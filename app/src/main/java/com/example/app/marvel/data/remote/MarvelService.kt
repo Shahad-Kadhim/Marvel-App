@@ -39,5 +39,22 @@ interface MarvelService{
         @Query("limit") numberOfCharacters: Int = 20,
         ): Response<MarvelResponse<EventDto>>
 
+    @GET("characters/{characterId}")
+    suspend fun getCharacterById(
+        @Path("characterId") characterId: Int
+        ): Response<MarvelResponse<CharacterDto>>
+
+
+    @GET("creators/{creatorId}")
+    suspend fun getCreatorById(
+        @Path("creatorId") creatorId: Int
+        ): Response<MarvelResponse<CreatorDto>>
+
+
+    @GET("comics/{comicId}")
+    suspend fun getComicById(
+        @Path("comicId") comicId: Int
+        ): Response<MarvelResponse<ComicsDto>>
+
 
 }

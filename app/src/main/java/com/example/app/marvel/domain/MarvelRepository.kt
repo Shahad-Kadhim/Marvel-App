@@ -1,16 +1,19 @@
 package com.example.app.marvel.domain
 
 import com.example.app.marvel.data.State
+import com.example.app.marvel.data.remote.response.CharacterDto
+import com.example.app.marvel.data.remote.response.ComicsDto
+import com.example.app.marvel.data.remote.response.CreatorDto
 import com.example.app.marvel.domain.models.*
 import kotlinx.coroutines.flow.Flow
 
-interface MarvelRepository{
+interface MarvelRepository {
 
-     fun getAllCharacters(): Flow<List<Character>>
+    fun getAllCharacters(): Flow<List<Character>>
 
     suspend fun refreshCharacters()
 
-     fun getAllComics(): Flow<List<Comic>>
+    fun getAllComics(): Flow<List<Comic>>
 
     suspend fun refreshComics()
 
@@ -20,7 +23,7 @@ interface MarvelRepository{
 
     fun getRecentSearches(): Flow<List<Searches>>
 
-    suspend fun addSearch(search:Searches)
+    suspend fun addSearch(search: Searches)
 
     fun getSeries(): Flow<List<Series>>
 
@@ -35,4 +38,11 @@ interface MarvelRepository{
     fun searchCharacter(searchKeyWord: String): Flow<State<List<Searches?>>>
 
     suspend fun getSearchesItemById(searchesId: Int): Searches
+
+    fun getCharacterById(characterId: Int): Flow<State<List<CharacterDto>?>>
+
+    fun getComicById(comicId: Int): Flow<State<List<ComicsDto>?>>
+
+    fun getCreatorById(creatorId: Int): Flow<State<List<CreatorDto>?>>
+
 }
